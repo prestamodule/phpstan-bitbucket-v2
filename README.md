@@ -8,20 +8,20 @@
 
 This PHPStan error formatter will add annotations in Bitbucket, for example in pull requests, similar to the built-in GitHub formatting.
 
-## PrestaModule fork compatibility
+## PHPStan 2 fork
 
-This fork supports PHPStan 1.x on PHP 7.2+ and PHPStan 2.x on PHP 7.4+. Composer selects a compatible PHPStan release for the runtime; the formatter does not raise the PHP requirement of existing PHP 7.2 steps.
+This repository supports PHPStan 2 on PHP 7.4+. The existing [prestamodule/phpstan-bitbucket](https://github.com/prestamodule/phpstan-bitbucket) repository remains dedicated to PHPStan 1. Existing pipelines continue to use that repository. Only projects explicitly configured with this new repository use this fork.
 
-The fork keeps bulk Bitbucket annotations (batches of up to 100) through `prestamodule/bitbucket-reports`. Register both forks in the consuming project; Composer does not inherit repository definitions from dependencies:
+The fork keeps bulk Bitbucket annotations (batches of up to 100) through `prestamodule/bitbucket-reports`. To migrate a project, replace its `repositories.phpstan-bitbucket` URL and register the reports fork in the consuming project:
 
 ```sh
-composer config repositories.phpstan-bitbucket vcs https://github.com/prestamodule/phpstan-bitbucket
+composer config repositories.phpstan-bitbucket vcs https://github.com/prestamodule/phpstan-bitbucket-v2
 composer config repositories.bitbucket-reports vcs https://github.com/prestamodule/bitbucket-reports
 composer config minimum-stability dev
-composer require --dev swisnl/phpstan-bitbucket:dev-main 'phpstan/phpstan:^2.0'
+composer require --dev swisnl/phpstan-bitbucket:dev-main 'phpstan/phpstan:^2.0@stable' prestashop/php-dev-tools
 ```
 
-Use an explicit PHPStan 1.x constraint for legacy PHP runtimes or when retaining existing analysis results. An unpinned `composer require phpstan/phpstan` can select PHPStan 2 on supported runtimes after this update. Compatibility of the formatter does not guarantee identical analysis findings in module projects.
+The Composer package name remains `swisnl/phpstan-bitbucket`. Composer does not inherit repository definitions from dependencies, so both repository registrations are required. The `@stable` constraint excludes PHPStan development releases. Review the project's PHPStan findings when migrating: formatter compatibility does not guarantee identical analysis results between PHPStan 1 and 2.
 
 ## Installation
 

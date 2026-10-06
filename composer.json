@@ -1,7 +1,7 @@
 {
     "name": "swisnl/phpstan-bitbucket",
     "type": "phpstan-extension",
-    "description": "PHPStan error formatter for Bitbucket Pipeline Reports",
+    "description": "PHPStan 2 error formatter for Bitbucket Pipeline Reports",
     "keywords": [
         "phpstan",
         "error-formatter",
@@ -10,7 +10,7 @@
         "reports",
         "testing"
     ],
-    "homepage": "https://github.com/swisnl/phpstan-bitbucket",
+    "homepage": "https://github.com/prestamodule/phpstan-bitbucket-v2",
     "license": "MIT",
     "authors": [{
             "name": "Alexander Timmermann",
@@ -24,8 +24,8 @@
         }
     ],
     "require": {
-        "php": "^7.2|^8.0",
-        "phpstan/phpstan": "^1.0 || ^2.0",
+        "php": "^7.4|^8.0",
+        "phpstan/phpstan": "^2.0",
         "swisnl/bitbucket-reports": "dev-main"
     },
     "autoload": {
